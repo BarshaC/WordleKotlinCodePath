@@ -33,8 +33,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-
-<img src='https://submissions.us-east-1.linodeobjects.com/and102/jCDQ14XR.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![walkthrough](https://user-images.githubusercontent.com/64405568/188540303-deaec01f-2cf9-4354-a491-25fb47160533.gif)
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with [Kap](https://getkap.co/) for macOS
