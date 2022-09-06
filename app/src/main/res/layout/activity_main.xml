@@ -55,19 +55,6 @@
         app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintTop_toBottomOf="@+id/tvFirstCheck" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etWordInput"
-        android:layout_width="312dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="104dp"
-        android:hint="Enter your name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnCheck"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCorrectAns"
-        app:layout_constraintVertical_bias="1.0" />
-
     <EditText
         android:id="@+id/etEnteredWord"
         android:layout_width="277dp"
@@ -75,7 +62,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Enter 4 letter guess here"
+        android:hint="Enter a 4 letter word here..."
         android:inputType="textCapWords"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnCheck"
@@ -151,11 +138,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="236dp"
-        android:visibility="invisible"
+        android:layout_marginTop="16dp"
         android:text="Guess #3 Check"
-        app:layout_constraintBottom_toTopOf="@+id/tvCorrectAns"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvThirdStatus" />
 
     <TextView
         android:id="@+id/tvCorrectAns"
@@ -207,4 +194,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnRestart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="PLAY AGAIN"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/etEnteredWord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCorrectAns"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

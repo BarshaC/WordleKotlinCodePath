@@ -1,6 +1,8 @@
 package com.example.wordlegamecodepathkotlin
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -15,25 +17,53 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.recreate
 import androidx.core.view.isVisible
 import com.github.jinatonic.confetti.ConfettoGenerator
+import java.util.*
+import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        var btn: Button = findViewById(R.id.btnCheck)
-        fun View.hideKeyboard() {
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(windowToken, 0)
+        var wordToGuess = FourLetterWordList.getRandomFourLetterWord()
+        fun scorekeeper(guess: String): Int {
+            var score = 0
+            for ( i in 0..3) {
+                if (guess[i] == wordToGuess[i]) {
+                    score ++
+                }
+            }
+            return score
         }
-        var allAlphabet = false
+        fun checkGuess(guess: String): SpannableStringBuilder {
+            val builder = SpannableStringBuilder()
+            for (i in 0..3) {
+                if (guess[i] == wordToGuess[i]) {
+                    val redSpannable = SpannableString(guess[i].toString())
+                    redSpannable.setSpan(ForegroundColorSpan(Color.GREEN), 0, 1, 0)
+                    builder.append(redSpannable)
+                } else if (guess[i] in wordToGuess) {
+                    val greenSpannable = SpannableString(guess[i].toString())
+                    greenSpannable.setSpan(ForegroundColorSpan(Color.RED), 0, 1, 0)
+                    builder.append(greenSpannable)
+                } else {
+                    val greenSpannable = SpannableString(guess[i].toString())
+                    greenSpannable.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, 1, 0)
+                    builder.append(greenSpannable)
+                }
+            }
+            return builder
+        }
         var firstguess = true
+        var x = 0
+//        val wordToGuess = FourLetterWordList.getRandomFourLetterWord()
+        val restart: Button = findViewById<Button>(R.id.btnRestart)
         if (firstguess) {
             findViewById<Button>(R.id.btnCheck).setOnClickListener {
                 Log.i("Main ", "a $wordToGuess")
-                firstguess = false
                 val etInputWord: EditText = findViewById(R.id.etEnteredWord)
                 val inputWord = etInputWord.text.toString()
                 if (isAlpha(inputWord) and (inputWord.length == 4)) {
@@ -42,9 +72,7 @@ class MainActivity : AppCompatActivity() {
                     val status1: TextView = findViewById(R.id.tvFirstStatus)
                     val check1: TextView = findViewById(R.id.tvFirstCheck)
                     val statuscheck1: TextView = findViewById(R.id.tvFirstStatusCheck)
-//                    var celebration: ConfettoGenerator = findViewById(R.id.viewKonfetti)
                     if (scorekeeper(inputWord) == 4) {
-//                        celebration.buil
                         findViewById<Button>(R.id.btnCheck).isEnabled = false
                         etInputWord.isEnabled = false
                     }
@@ -65,13 +93,13 @@ class MainActivity : AppCompatActivity() {
                     if (isAlpha(inputWord1) and (inputWord.length == 4)) {
                         var input2: TextView = findViewById(R.id.tvSecondGuessed)
                         var check2: TextView = findViewById(R.id.tvSecondCheck)
+                        var statuscheck2: TextView = findViewById(R.id.tvSecondStatusCheck)
                         input2.text = inputWord1.uppercase()
                         input2.isVisible = true
                         var status2: TextView = findViewById(R.id.tvSecondStatus)
                         status2.isVisible = true
-                        check2.setText(checkGuess(inputWord.uppercase()), TextView.BufferType.SPANNABLE)
+                        check2.setText(checkGuess(inputWord1.uppercase()), TextView.BufferType.SPANNABLE)
                         check2.isVisible = true
-                        var statuscheck2: TextView = findViewById(R.id.tvSecondStatusCheck)
                         statuscheck2.isVisible = true
                         etInputWord.setText("")
                         etInputWord.hideKeyboard()
@@ -102,10 +130,13 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, "You can only enter 4 letters", Toast.LENGTH_SHORT).show()
 
                         }
-                        findViewById<Button>(R.id.btnCheck).setOnClickListener {
-                            var btn: Button = findViewById(R.id.btnCheck)
-                            btn.isEnabled = false
-                            etInputWord.isEnabled= false
+                        findViewById<Button>(R.id.btnCheck).isEnabled = false
+                        findViewById<EditText>(R.id.etEnteredWord).isEnabled = false
+                        restart.isVisible = true
+                        restart.setOnClickListener {
+                            val intent = intent
+                            finish()
+                            startActivity(intent)
                         }
                       }
                     }
@@ -113,31 +144,12 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
-
-
     }
-    private var wordToGuess = FourLetterWordList.getRandomFourLetterWord()
 
-    private fun checkGuess(guess: String): SpannableStringBuilder {
-        val builder = SpannableStringBuilder()
-        //var result = ""
-        for (i in 0..3) {
-            if (guess[i] == wordToGuess[i]) {
-                val redSpannable = SpannableString(guess[i].toString())
-                redSpannable.setSpan(ForegroundColorSpan(Color.GREEN), 0, 1, 0)
-                builder.append(redSpannable)
-            } else if (guess[i] in wordToGuess) {
-                val greenSpannable = SpannableString(guess[i].toString())
-                greenSpannable.setSpan(ForegroundColorSpan(Color.RED), 0, 1, 0)
-                builder.append(greenSpannable)
-            } else {
-                val greenSpannable = SpannableString(guess[i].toString())
-                greenSpannable.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, 1, 0)
-                builder.append(greenSpannable)
-            }
-        }
-        return builder
-    }
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
+}
 
 fun isAlpha(name: String): Boolean {
     val chars = name.toCharArray()
@@ -149,14 +161,6 @@ fun isAlpha(name: String): Boolean {
     return true
 }
 
-fun scorekeeper(guess: String): Int {
-    var score = 0
-    for ( i in 0..3) {
-        if (guess[i] == wordToGuess[i]) {
-            score ++
-        }
-    }
-    return score
-}
+
 
 
