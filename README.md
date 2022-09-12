@@ -30,10 +30,11 @@ The following **additional** features are implemented:
 * [ ] List anything else that you can get done to improve the app functionality!
 - get hint for each word
 
-## Video Walkthrough
+## Video Walkthrough![walkthrough](https://user-images.githubusercontent.com/64405568/189727856-5a7a202c-2959-4b5c-8d8d-13b3dfb1b210.gif)
+
 
 Here's a walkthrough of implemented user stories:
-![Walkthrough_Unit2](https://user-images.githubusercontent.com/64405568/189727482-3b59ddbf-2371-4353-9ab2-e87d6b4821f3.gif)
+
 GIF created with [Kap](https://getkap.co/) for macOS
 
 
