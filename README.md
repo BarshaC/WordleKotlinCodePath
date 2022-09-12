@@ -33,8 +33,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-<img src='https://user-images.githubusercontent.com/64405568/188540303-deaec01f-2cf9-4354-a491-25fb47160533.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
+![Walkthrough_Unit2](https://user-images.githubusercontent.com/64405568/189727482-3b59ddbf-2371-4353-9ab2-e87d6b4821f3.gif)
 GIF created with [Kap](https://getkap.co/) for macOS
 
 
@@ -56,5 +55,6 @@ Describe any challenges encountered while building the app.
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
+    See the License for the specific language 
+governing permissions and
     limitations under the License.
